@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geolocalización</title>
+</head>
+<body onload="loadLocation();">
+    <label id="long"></label> </br>
+    <label id="latitud"></label> </br>
+    <a id="link" target="_blank">Enlace al mapa</a>
+    
+</body>
+<script type="text/javascript">
+    function loadLocation() {
+        //Inicializamos la función y definimos el tiempo máximo, las funciones de error y éxito
+        navigator.geolocation.getCurrentPosition(viewMap, viewError, {timeout:1000});
+    }
+
+    //Función de éxito
+    function viewMap(position) {
+        var lon = position.coords.longitude; //guardamos la longitud
+        var lat = position.coords.latitude;  //guardamos la latitud
+
+        var link = "http://maps.google.com/?ll="+lat+","+lon+"&z=14";
+        document.getElementById("long").innerHTML = "Longitud: "+lon;
+        document.getElementById("latitud").innerHTML = "Latitud: "+lat;
+
+        document.getElementById("link").href = link;
+    }
+
+    function viewError(error) {
+        alert(error.code);
+    }
+</script>
+</html>

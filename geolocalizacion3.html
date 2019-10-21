@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geolocalizacion</title>
+    <script>
+        window.addEventListener("load", inicio);
+        var observador;
+        function inicio() {
+            // navigator.geolocation.getCurrentPosition(alExito, alError);
+            navigator.geolocation.watchPosition(alExito, alError);
+        }
+        function alExito(info) {
+            campoLatitud.value = info.coords.latitude;
+            campoLongitud.value = info.coords.longitude;
+            campoAltitud.value = info.coords.altitud;
+        }
+        function alError(error) {
+            alert("Hubo un error");
+        }
+        function detener() {
+            navigator.geolocation.clearWatch(observador);
+        }
+    </script>
+</head>
+<body>
+   <button onclick="detener()">Detener</button> 
+   Latitud:<input id="campoLatitud" /> <br>
+   Longitud:<input id="campoLongitud" /> <br>
+   Altitud:<input id="campoAltitud" /> <br>
+</body>
+</html>
